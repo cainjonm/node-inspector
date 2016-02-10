@@ -260,6 +260,7 @@ WebInspector.Main.prototype = {
 
     _createConnection: function()
     {
+        this.numTries = this.numTries || 0;
         console.timeStamp("Main._createConnection");
         InspectorBackend.loadFromJSONIfNeeded("protocol.json");
 
@@ -282,6 +283,7 @@ WebInspector.Main.prototype = {
      */
     _connectionEstablished: function(connection)
     {
+        var that = this;
         console.timeStamp("Main._connectionEstablished");
         connection.addEventListener(InspectorBackendClass.Connection.Events.Disconnected, onDisconnected);
 
@@ -292,7 +294,10 @@ WebInspector.Main.prototype = {
         {
             if (WebInspector._disconnectedScreenWithReasonWasShown)
                 return;
-            new WebInspector.RemoteDebuggingTerminatedScreen(event.data.reason).showModal();
+            // TODO: check reason, respond if necessary
+            console.log("ahh: ", event.data.reason);
+            // that._createConnection();
+            // new WebInspector.RemoteDebuggingTerminatedScreen(event.data.reason).showModal();
         }
 
         InspectorBackend.setConnection(connection);
