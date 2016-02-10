@@ -294,9 +294,8 @@ WebInspector.Main.prototype = {
         {
             if (WebInspector._disconnectedScreenWithReasonWasShown)
                 return;
-            // TODO: check reason, respond if necessary
-            console.log("ahh: ", event.data.reason);
-            // that._createConnection();
+            // TODO: probably not great
+            that._createConnection();
             // new WebInspector.RemoteDebuggingTerminatedScreen(event.data.reason).showModal();
         }
 
